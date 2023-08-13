@@ -12,16 +12,19 @@ const authCheck = (token, clearName) => {
       next();
     } catch (err) {
       res.clearCookie(clearName).status(401);
+      //
       throw new Error(err.message);
     }
   };
 };
 
+// This middleware is used to check if the user is logged in or not
 const authMiddleware = (req, res, next) => {
   const token = req.cookies.token;
   authCheck(token, 'token')(req, res, next);
 };
 
+// This middleware is used to check if the user has access to the single user or not
 export const accessMiddleware = (req, res, next) => {
   const token = req.cookies.accessToken;
   authCheck(token, 'accessToken')(req, res, next);

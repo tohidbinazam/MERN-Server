@@ -36,6 +36,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     .json({ user });
 });
 
+// this controller is used to create accessToken for access single user data
 export const accessToken = asyncHandler(async (req, res) => {
   const decoded = req.data;
   const user = await User.findById(decoded.id).select('-password');
